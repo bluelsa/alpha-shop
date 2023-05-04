@@ -1,0 +1,17 @@
+section.registerContainer {
+ width: 50%;
+  h2.registerTitle {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    color: var(--main-text);
+  }
+}
+
+section.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 52px;
+  margin-bottom: 100px;
+}
+
