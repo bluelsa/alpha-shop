@@ -1,4 +1,5 @@
 import styles from './Register.module.scss'
+import Cart from '../Cart/Cart'
 
 import StepProgress from './StepProgress'
 import Step1 from './Step1'

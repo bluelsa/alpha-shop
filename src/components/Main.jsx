@@ -3,7 +3,6 @@ import styles from './Main.module.scss'
 import Register from './Register/Register'
 import Cart from './Cart/Cart'
 
-
 export default function Main() {
   return(
     <>

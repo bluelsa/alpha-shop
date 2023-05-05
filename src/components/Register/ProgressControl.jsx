@@ -1,7 +1,7 @@
  import styles from './ProgressControl.module.scss'
 
- import leftArrow from '../../icons/left-arrow.svg'
- import rightArrow from '../../icons/right-arrow.svg'
+ import {ReactComponent as LeftArrow} from '../../icons/left-arrow.svg'
+ import {ReactComponent as RightArrow} from '../../icons/right-arrow.svg'
  
 
  export default function StepControl() {
@@ -11,22 +11,22 @@
       <section className={`${styles.buttonGroup} col col-12`} data-phase="address">
         <button className={styles.next}>
           下一步
-          <img src={rightArrow} alt="" />
+          <RightArrow/>
         </button>
       </section>
       {/* <section className={`${styles.buttonGroup} col col-12`} data-phase="shipping">
         <button className={styles.prev}>
-          <img src={leftArrow} alt="" />
+          <LeftArrow/>
           上一步
         </button>
         <button className={styles.next}>
           下一步
-          <img src={rightArrow} alt="" />
+          <RightArrow/>
         </button>
       </section>
       <section className={`${styles.buttonGroup} col col-12`} data-phase="credit-card">
         <button className={styles.prev}>
-          <img src={leftArrow} alt="" />
+          <LeftArrow/>
           上一步
         </button>
         <button className={styles.next}>

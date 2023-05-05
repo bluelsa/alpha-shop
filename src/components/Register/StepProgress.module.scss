@@ -2,7 +2,6 @@
 @import '../Register/Steps.module.scss';
 
 section.progressContainer {
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,7 +39,6 @@ section.progressContainer {
         line-height: 24px;
         text-align: center;
         color: inherit;
-        // 暫時多加的，為了顯示圓圈
         border: 1px solid black;
         border-radius: 50%;
       }
@@ -59,102 +57,33 @@ section.progressContainer {
   }
 }
 
-$phase-map: (
-  1: 'address',
-  2: 'shipping',
-  3: 'credit-card'
-);
-
-@for $index from 1 to 4 {
-  section.registerContainer[data-phase="#{$index}"] {
-
-    // progress-bar
-    .progressBar {
-      &[data-order='1'] {
-        border-color: var(--done-progress-border);
-      }
-
-      &[data-order='2'] {
-        @if $index ==1 {
-          border-color: var(--undone-progress-border);
-        }
-
-        @else {
-          border-color: var(--done-progress-border);
-        }
-      }
+.progressContainer {
+  .progressBar {
+    &[data-order='1'] {
+      border-color: var(--done-progress-border);
     }
 
-    @each $key,
-    $phase in $phase-map {
+    &[data-order='2'] {
+      border-color: var(--undone-progress-border);
+    }
+  }
 
-      // progress-group
-      .progressGroup[data-phase="#{$phase}"] {
-        @if $key >$index {
-          .progressIcon {
-            @extend %undone-icon;
-          }
+  span[dataPhase="address"] {
+    .progressIcon {
+      @extend %current-icon;
+      background-color: var(--pg-addr-bg-color);
+      border-color: var(--pg-addr-bg-color);
+      color: var(--pg-addr-color);
+    }
+  }
 
-          .progressLabel {
-            @extend %undone-text;
-          }
-        }
-
-        @else if $key ==$index {
-          .progressIcon {
-            @extend %current-icon;
-          }
-
-          .progressLabel {
-            @extend %current-text;
-          }
-        }
-
-        @else {
-          .progressIcon {
-            @extend %done-icon;
-          }
-
-          .progressLabel {
-            @extend %done-text;
-          }
-        }
-
-        @if $phase =='address' {
-          .progressIcon {
-            background-color: var(--pg-addr-bg-color);
-            border-color: var(--pg-addr-bg-color);
-
-            .text {
-              color: var(--pg-addr-color);
-            }
-          }
-        }
-      }
-
-      // form
-      form[data-phase="#{$phase}"] {
-        @if $index ==$key {
-          display: flex;
-        }
-
-        @else {
-          display: none;
-        }
-      }
-
-      // progress-control
-      &~section.progressControlContainer {
-        .buttonGroup[data-phase="#{$phase}"] {
-          @if $index ==$key {
-            display: flex;
-          }
-
-          @else {
-            display: none;
-          }
-        }
-      }
+  span[dataPhase="shipping"],
+  span[dataPhase="credit-card"] {
+    .progressIcon {
+      @extend %undone-icon;
     }
   }
 }
+
+
+
