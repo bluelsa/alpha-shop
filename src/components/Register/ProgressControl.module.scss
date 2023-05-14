@@ -10,6 +10,7 @@ section.progressControlContainer {
 section.buttonGroup {
   padding-top: 24px;
   border-top: 1px solid #E6E6EB;
+  display: flex;
 
   button {
     display: flex;
@@ -52,3 +53,26 @@ section.buttonGroup {
     }
   }
 }
+
+
+// form[data-phase="#{$phase}"] {
+//   @if $index ==$key {
+//     display: flex;
+//   }
+
+//   @else {
+//     display: none;
+//   }
+// }
+
+// &~section.progressControlContainer {
+//   .button-group[data-phase="#{$phase}"] {
+//     @if $index ==$key {
+//       display: flex;
+//     }
+
+//     @else {
+//       display: none;
+//     }
+//   }
+// }

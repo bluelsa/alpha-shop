@@ -1,25 +1,35 @@
 import styles from './Register.module.scss'
-import Cart from '../Cart/Cart'
 
 import StepProgress from './StepProgress'
-import Step1 from './Step1'
-// import Step2 from './Step2'
-// import Step3 from './Step3'
+import Form from './Form'
 import ProgressControl from './ProgressControl'
 
+import {useState} from 'react'
+
 export default function Register() {
+  const [step, setStep] = useState(1)
+  
+  function handlePrevStep() {
+    step > 1 && setStep(step - 1);
+  }
+  function handleNextStep() {
+    step < 3 && setStep(step + 1);
+  }
+
   return(
     <>
-    <section class={`${styles.registerContainer} col col-lg-6 col-sm-12`} data-phase="1" data-total-price="0">
-      <h2 class={`${styles.registerTitle} col col-12`}>結帳</h2>
-    <StepProgress/>
-    <section class={`${styles.formContainer} col col-12`}>
-      <Step1/>
-      {/* <Step2/> */}
-      {/* <Step3/> */}
+    <section className={styles.registerContainer}>
+      <h2 className={styles.registerTitle}>結帳</h2>
+    <StepProgress step={step}/>
+    <section className={styles.formContainer}>
+      <Form step={step}/>
     </section>
-      <ProgressControl/>
+      <ProgressControl 
+      onPrevStep={handlePrevStep}
+      onNextStep={handleNextStep}
+      step={step}/>
     </section>
     </>
   )
 }
+

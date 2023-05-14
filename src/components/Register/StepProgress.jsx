@@ -1,13 +1,14 @@
 import styles from './StepProgress.module.scss'
-import pgComplete from '../../icons/pg-complete.svg'
+import {ReactComponent as PgComplete} from '../../icons/pg-complete.svg'
+
 
 function Step ({phase, text, label}) {
   return (
     <>
-          <span className={styles.progressGroup} dataPhase={phase}>
+          <span className={styles.activeGroup} data-phase={phase}>
         <span className={styles.progressIcon}>
           <span className={styles.text}>{text}</span>
-          {/* <img src={pgComplete} alt="" /> */}
+          <PgComplete className={styles.icon}/>
         </span>
         <span className={styles.progressLabel}>{label}</span>
       </span>
@@ -15,14 +16,61 @@ function Step ({phase, text, label}) {
   )
 }
 
-export default function StepProgress() {
-  return (
-    <section className={`${styles.progressContainer} col col-12`}>
+export default function StepProgress({step}) {
+
+  if (step === 1) {
+    return(
+      <>
+      <section className={styles.progressContainer}>
+      <span className={styles.activeGroup}>
    <Step phase='address' text='1' label='寄送地址'/>
-   <span className={styles.progressBar} data-order='1' />
+      </span>
+      <span className={styles.activeProgressBar}></span>
+   <span className={styles.progressGroup}>
    <Step phase='shipping' text='2' label='運送方式'/>
-   <span className={styles.progressBar} data-order='2' />
+   </span>
+<span className={styles.progressBar}></span>
+<span className={styles.progressGroup}>
    <Step phase='credit-card' text='3' label='付款資訊'/>
+   </span>
     </section>
-  )
+      </>
+    )
+  } else if (step === 2) {
+    return(
+      <>
+      <section className={styles.progressContainer}>
+      <span className={styles.doneGroup}>
+   <Step phase='address' text='1' label='寄送地址'/>
+      </span>
+      <span className={styles.activeProgressBar}></span>
+   <span className={styles.activeGroup}>
+   <Step phase='shipping' text='2' label='運送方式'/>
+   </span>
+<span className={styles.activeProgressBar}></span>
+<span className={styles.progressGroup}>
+   <Step phase='credit-card' text='3' label='付款資訊'/>
+   </span>
+    </section>
+      </>
+    )
+  } else if (step === 3) {
+    return(
+      <>
+      <section className={styles.progressContainer}>
+      <span className={styles.doneGroup}>
+   <Step phase='address' text='1' label='寄送地址'/>
+      </span>
+      <span className={styles.activeProgressBar}></span>
+   <span className={styles.doneGroup}>
+   <Step phase='shipping' text='2' label='運送方式'/>
+   </span>
+<span className={styles.activeProgressBar}></span>
+<span className={styles.activeGroup}>
+   <Step phase='credit-card' text='3' label='付款資訊'/>
+   </span>
+    </section>
+      </>
+    )
+  }
 }

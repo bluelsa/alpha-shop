@@ -1,4 +1,4 @@
-import styles from './Steps.module.scss'
+import styles from './Step2.module.scss'
 
 export default function Step2() {
   return(
@@ -11,21 +11,22 @@ export default function Step2() {
               <div className={styles.radioInfo}>
                 <div className="col col-12">
                   <div className={styles.text}>標準運送</div>
-                  <div className={styles.price}></div>
+                  
                 </div>
                 <div className={`${styles.period} col col-12`}>約 3~7 個工作天</div>
               </div>
+              <div className={styles.price}>免費</div>
               <div className={styles.radioBoxBorder}></div>
             </label>
-            <label className={`${styles.radioGroup}col col-12`} data-price="500">
-              <input id="shipping-dhl" type="radio" name="shipping" />
+            <label className={`${styles.radioGroup} col col-12`} data-price="500">
+              <input id="shipping-dhl" type="radio" name="shipping"/>
               <div className={styles.radioInfo}>
                 <div className="col col-12">
                   <div className={styles.text}>DHL 貨運</div>
-                  <div className={styles.price}></div>
                 </div>
-                <div className={`${styles.period} col col-12`}>48 小時內送達</div>
+                <div className={`${styles.period} col col-12`}>48小時內送達</div>
               </div>
+              <div className={styles.price}>$ 500</div>
               <div className={styles.radioBoxBorder}></div>
             </label>
           </section>
