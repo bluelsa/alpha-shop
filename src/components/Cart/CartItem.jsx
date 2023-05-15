@@ -3,43 +3,24 @@ import { ReactComponent as PlusIcon } from "../../icons/plus.svg";
 import { ReactComponent as MinusIcon } from "../../icons/minus.svg";
 import { useState } from 'react'
 
-
-// const initialProducts = [
-//   {
-//     id: '1',
-//     name: '破壞補丁修身牛仔褲',
-//     img: Product1,
-//     price: 3999,
-//     quantity: 1,
-//   },
-//   {
-//     id: '2',
-//     name: '刷色直筒牛仔褲',
-//     img: Product2,
-//     price: 1299,
-//     quantity: 1,
-//   },
-// ]
-
 export default function CartItems(props) {
-const [count, setCount] = useState(1)
-  
-  function handlePlusClick() {
-    setCount(count + 1)
-    props.totalPlus(props.price)
-  }
-  
+  const [count, setCount] = useState(props.quantity)
+
   function handleMinusClick() {
-    if(count > 0) {
-    setCount(count - 1)
-    props.totalMinus(props.price)
+    if(count > 1) {
+      setCount(count - 1)
+      props.setTotalPrice(props.totalPrice - props.price)
     }
   }
 
+  function handlePlusClick() {
+    setCount(count + 1)
+    props.setTotalPrice(props.totalPrice + props.price)
+  }
+
   return (
-    <>
-    <section className={styles.productList}>
-          <div className={styles.productContainer} key={props.id} data-count={props.count} data-price={props.price}>
+<section className={styles.productList}>
+          <div className={styles.productContainer} key={props.id} data-count={props.quantity} data-price={props.price}>
               <img className={styles.imgContainer} src={props.img}alt="" />
               <div className={styles.productInfo}>
                 <div className={styles.productName}>{props.name}</div>
@@ -53,7 +34,7 @@ const [count, setCount] = useState(1)
                 <div className={styles.price}>$ {props.price * count}</div>
               </div>
             </div>
-             </section>
-            </>
-  )
+            </section>
+  )  
 }
+
