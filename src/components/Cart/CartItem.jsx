@@ -31,7 +31,7 @@ export default function CartItems(props) {
                    <PlusIcon onClick={handlePlusClick}/>
                   </div>
                 </div>
-                <div className={styles.price}>$ {props.price * count}</div>
+                <div className={styles.price}>$ {props.price}</div>
               </div>
             </div>
             </section>
