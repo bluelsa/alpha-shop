@@ -23,19 +23,53 @@ const data = [
 ]
 
 export default function Cart() {
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [products, setProducts] = useState(data)
 
-  //購物車預設各一樣商品的總金額
-  let price = 0
-  data.forEach(item => {
-    price = price + item.price * item.quantity
-  })
+  function handleMinusClick(productId) {
+  
+    let nextProducts = products.map((product) => {
+      if (product.id === productId) {
+        return {
+          ...product,
+          quantity: product.quantity - 1,
+        };
+      } else {
+        return product;
+      }
+    });
+    nextProducts = nextProducts.filter((p) => p.quantity > 0);
+    setProducts(nextProducts);
+  }
+
+  function handlePlusClick(productId) {
+    setProducts(
+      products.map((product) => {
+        if (product.id === productId) {
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+          };
+        } else {
+          return product;
+        }
+      })
+    );
+  }
+
+  let totalPrice = 0
+  for (let i = 0; i < products.length; i++) {
+    totalPrice += products[i].price * products[i].quantity;
+  }
+
 
   return(
       <section className={`${styles.cartContainer} col col-lg-5 col-sm-12`}>
           <h3 className={styles.cartTitle}>購物籃</h3>
-          {data.map( product =>
-        <CartItem {...product} key={product.id} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>
+          {products.map( product =>
+        <CartItem {...product} key={product.id} 
+        products={products} 
+        setProducts={setProducts} 
+        onMinusClick={()=>{handleMinusClick(product.id)}} onPlusClick={()=> {handlePlusClick(product.id)}}/>
         ) 
       }
           <section className={`${styles.cartInfo} shipping col col-12`}>
@@ -44,7 +78,7 @@ export default function Cart() {
           </section>
           <section className={`${styles.cartInfo} shipping col col-12`}>
             <div className={styles.text}>小計</div>
-            <div className={styles.price}>$ {price + totalPrice}</div>
+            <div className={styles.price}>$ {totalPrice}</div>
           </section>
           </section>
   )

@@ -1,22 +1,8 @@
 import styles from '../Cart/Cart.module.scss'
 import { ReactComponent as PlusIcon } from "../../icons/plus.svg";
 import { ReactComponent as MinusIcon } from "../../icons/minus.svg";
-import { useState } from 'react'
 
-export default function CartItems(props) {
-  const [count, setCount] = useState(props.quantity)
-
-  function handleMinusClick() {
-    if(count > 1) {
-      setCount(count - 1)
-      props.setTotalPrice(props.totalPrice - props.price)
-    }
-  }
-
-  function handlePlusClick() {
-    setCount(count + 1)
-    props.setTotalPrice(props.totalPrice + props.price)
-  }
+export default function CartItem(props) {
 
   return (
 <section className={styles.productList}>
@@ -26,9 +12,9 @@ export default function CartItems(props) {
                 <div className={styles.productName}>{props.name}</div>
                 <div className={styles.productControlContainer}>
                   <div className={styles.productControl}>
-                  <MinusIcon onClick={handleMinusClick}/>
-                    <span className={styles.productCount}>{count}</span>
-                   <PlusIcon onClick={handlePlusClick}/>
+                  <MinusIcon onClick={props.onMinusClick}/>
+                    <span className={styles.productCount}>{props.quantity}</span>
+                   <PlusIcon onClick={props.onPlusClick}/>
                   </div>
                 </div>
                 <div className={styles.price}>$ {props.price}</div>
@@ -37,4 +23,3 @@ export default function CartItems(props) {
             </section>
   )  
 }
-
