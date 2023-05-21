@@ -4,32 +4,31 @@ import StepProgress from './StepProgress'
 import Form from './Form'
 import ProgressControl from './ProgressControl'
 
-import {useState} from 'react'
+import { useContext } from 'react'
+import { CartContext } from '../Cart/CartContext'
+import { InfoContext } from '../Register/InfoContext'
+
+
 
 export default function Register() {
-  const [step, setStep] = useState(1)
-  
-  function handlePrevStep() {
-    step > 1 && setStep(step - 1);
-  }
-  function handleNextStep() {
-    step < 3 && setStep(step + 1);
+  const {info} = useContext(InfoContext)
+  const {totalPrice} = useContext(CartContext)
+
+  function handleSubmitClick() {
+    alert(`訂單提交成功! \n\n總金額: $${totalPrice} \n持卡人姓名: ${info.name} \n卡號: ${info.number} \n有效期限: ${info.date} \nCVC/CCV: ${info.code}`) 
   }
 
   return(
-    <>
     <section className={styles.registerContainer}>
       <h2 className={styles.registerTitle}>結帳</h2>
-    <StepProgress step={step}/>
+    <StepProgress/>
     <section className={styles.formContainer}>
-      <Form step={step}/>
+      <Form/>
     </section>
       <ProgressControl 
-      onPrevStep={handlePrevStep}
-      onNextStep={handleNextStep}
-      step={step}/>
+      onSend={handleSubmitClick}
+      /> 
     </section>
-    </>
   )
 }
 

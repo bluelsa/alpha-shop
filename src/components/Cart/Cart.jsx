@@ -1,32 +1,13 @@
 import styles from './Cart.module.scss'
 import CartItem from './CartItem'
-import Product1 from '../../icons/product-1.jpeg'
-import Product2 from '../../icons/product-2.jpeg'
-import {useState} from 'react'
+import { useContext } from 'react'
+import { CartContext } from './CartContext'
 
-
-const data = [
-  {
-    id: '1',
-    name: '破壞補丁修身牛仔褲',
-    img: Product1,
-    price: 3999,
-    quantity: 1,
-  },
-  {
-    id: '2',
-    name: '刷色直筒牛仔褲',
-    img: Product2,
-    price: 1299,
-    quantity: 1,
-  },
-]
 
 export default function Cart() {
-  const [products, setProducts] = useState(data)
+const {products, setProducts, totalPrice} = useContext(CartContext)
 
   function handleMinusClick(productId) {
-  
     let nextProducts = products.map((product) => {
       if (product.id === productId) {
         return {
@@ -55,31 +36,32 @@ export default function Cart() {
       })
     );
   }
-
-  let totalPrice = 0
-  for (let i = 0; i < products.length; i++) {
-    totalPrice += products[i].price * products[i].quantity;
-  }
-
-
+  
+  if (products.length < 1) {
+    return(
+      <section className={styles.cartContainer}>
+        <h3 className={styles.cartTitle}>購物籃</h3>
+        <div><p>尚未加入商品</p></div>
+      </section>
+    )
+  } else {
   return(
-      <section className={`${styles.cartContainer} col col-lg-5 col-sm-12`}>
+      <section className={styles.cartContainer}>
           <h3 className={styles.cartTitle}>購物籃</h3>
           {products.map( product =>
-        <CartItem {...product} key={product.id} 
-        products={products} 
-        setProducts={setProducts} 
-        onMinusClick={()=>{handleMinusClick(product.id)}} onPlusClick={()=> {handlePlusClick(product.id)}}/>
+        <CartItem {...product} key={product.id}  
+        onMinusClick={()=>{handleMinusClick(product.id)}} onPlusClick={()=> {handlePlusClick(product.id)}}
+        />
         ) 
       }
-          <section className={`${styles.cartInfo} shipping col col-12`}>
+          <section className={styles.cartInfo}>
             <div className={styles.text}>運費</div>
             <div className={styles.price}>免費</div>
           </section>
-          <section className={`${styles.cartInfo} shipping col col-12`}>
+          <section className={styles.cartInfo}>
             <div className={styles.text}>小計</div>
             <div className={styles.price}>$ {totalPrice}</div>
           </section>
-          </section>
+          </section> 
   )
-}
+} }

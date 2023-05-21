@@ -1,5 +1,7 @@
 import styles from './StepProgress.module.scss'
 import {ReactComponent as PgComplete} from '../../icons/pg-complete.svg'
+import { useContext } from 'react'
+import { StepContext } from './StepContext'
 
 
 function Step ({phase, text, label}) {
@@ -16,7 +18,8 @@ function Step ({phase, text, label}) {
   )
 }
 
-export default function StepProgress({step}) {
+export default function StepProgress() {
+  const {step} = useContext(StepContext)
 
   if (step === 1) {
     return(
